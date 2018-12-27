@@ -1,0 +1,33 @@
+<ion-header>
+  <app-header title="Gastos Variables"></app-header>
+</ion-header>
+
+<ion-content>
+  <ion-list class="items-list">
+    <ion-item class="no-height"></ion-item>
+    <ion-item *ngFor="let outcome of variable_outcomes">
+      <div [ngClass]="{extra: outcome.extra}" class="word-break">
+        <span class="mr-25">{{outcome.created_at | date:'dd/MM'}}</span>
+        <ion-icon name="bulb" *ngIf="outcome.extra"></ion-icon>
+        {{outcome.type | capitalize}}
+      </div>
+      <div class="item-note mr-20" item-end>
+        ${{outcome.amount}}
+      </div>
+
+      <ion-icon name="trash" item-end (click)="delete(outcome)" *ngIf="can_edit"></ion-icon>
+    </ion-item>
+
+    <ion-item *ngIf="variable_outcomes.length == 0" class="item-center">
+      <div>
+        No hay gastos variables cargados
+      </div>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-list>
+
+  <ion-fab bottom right (click)="newOutcome()" *ngIf="can_edit">
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

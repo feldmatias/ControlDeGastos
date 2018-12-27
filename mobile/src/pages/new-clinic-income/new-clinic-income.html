@@ -1,0 +1,33 @@
+<ion-header>
+  <app-header title="Nuevo ingreso" disabled="true"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Clínica</ion-label>
+      <ion-input value="{{clinic_name}}" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Fecha</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="date" name="date" [min]="min_date" [max]="max_date" cancelText="Cancelar" doneText="Seleccionar" required>
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Monto</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto" required name="amount" [(ngModel)]="amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">
+          <span>Cargar ingreso</span>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

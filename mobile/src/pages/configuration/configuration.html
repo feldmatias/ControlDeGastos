@@ -1,0 +1,38 @@
+<ion-header>
+  <app-header title="Configuración" [showMonths]="false"></app-header>
+</ion-header>
+
+<ion-content>
+  <ion-item no-lines>
+    <ion-select [(ngModel)]="selectedData" class="styled-select" cancelText="Cancelar" okText="Seleccionar" placeholder="Dato Listable">
+      <ion-label>Dato</ion-label>
+      <ion-option *ngFor="let data_type of data" [value]="data_type">{{data_type.display_name}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list class="items-list" *ngIf="selectedData">
+    <ion-item class="no-height"></ion-item>
+
+    <ng-container *ngFor="let item of selectedData.list">
+      <ion-item *ngIf="!item.deleted">
+        <div>
+          {{item.name | capitalize}}
+        </div>
+
+        <ion-icon name="trash" item-end (click)="delete(item)"></ion-icon>
+      </ion-item>
+    </ng-container>
+    
+    <ion-item *ngIf="selectedData.list.length == 0" class="item-center">
+      <div>
+        No hay datos para listar
+      </div>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-list>
+
+  <ion-fab bottom right (click)="newListableType()" *ngIf="selectedData">
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

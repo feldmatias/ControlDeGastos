@@ -1,0 +1,33 @@
+<ion-header>
+  <app-header title="Gastos Fijos"></app-header>
+</ion-header>
+
+<ion-content>
+  <ion-list class="items-list">
+    <ion-item class="no-height"></ion-item>
+    <ng-container *ngFor="let outcome of fixed_outcomes">
+      <ion-item *ngIf="outcome.fixed_outcomes.length > 0">
+        <div>
+          {{outcome.name | capitalize}}
+        </div>
+        <div class="item-note mr-50" item-end>
+          ${{outcome.fixed_outcomes[0].amount}}
+        </div>
+
+        <ion-icon name="create" item-end (click)="edit(outcome)" *ngIf="can_edit"></ion-icon>
+      </ion-item>
+    </ng-container>
+
+    <ion-item *ngIf="!hasOutcomes()" class="item-center">
+      <div>
+        No hay gastos fijos cargados
+      </div>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-list>
+
+  <ion-fab bottom right (click)="newOutcome()" *ngIf="can_edit">
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

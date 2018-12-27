@@ -1,0 +1,31 @@
+app-header {
+    .max-width{
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .month-label{
+        text-align: center;
+        font-size: 18px;
+        color: white;
+    }
+
+    .select-text{
+        font-size: 18px;
+        text-align: center !important;
+        color: white;
+    }
+
+    .select-icon-inner{
+        font-size: 18px;
+        color: white !important;
+    }
+
+    .transparent{
+        background-color: transparent;
+    }
+
+    .transparent .item-inner{
+        border-bottom: none !important;
+    }
+}

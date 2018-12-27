@@ -1,0 +1,144 @@
+<ion-header>
+  <app-header title="Balance"></app-header>
+</ion-header>
+
+<ion-content>
+  <ion-list class="items-list">
+    <ion-item class="no-height"></ion-item>
+
+    <ion-item class="item-header">
+      Saldo
+    </ion-item>
+
+    <ion-item>
+      Saldo Inicial
+      <div [ngClass]="can_edit ? 'item-note mr-15' : 'item-note mr-35'" item-end>
+        ${{initial_balance | number}}
+      </div>
+      <ion-icon class="mr-0" name="create" item-end (click)="editInitialBalance()" *ngIf="can_edit"></ion-icon>
+    </ion-item>
+
+    <!-- Incomes -->
+    <ion-item class="item-header">
+      Ingresos
+    </ion-item>
+
+    <ion-item>
+      Ingresos de clínicas
+      <div class="item-note mr-35" item-end>
+        ${{total_clinic_incomes | number}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      Ingresos de alquileres
+      <div class="item-note mr-35" item-end>
+        ${{total_department_incomes | number}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      Gastos de clínicas
+      <div class="item-note mr-35" item-end>
+        ${{total_clinic_outcomes | number}}
+      </div>
+    </ion-item>
+
+    <ion-item class="total">
+      Total ingresos
+      <div class="item-note mr-35" item-end>
+        ${{total_incomes | number}}
+      </div>
+    </ion-item>
+
+    <!-- Outcomes -->
+    <ion-item class="item-header">
+      Gastos
+    </ion-item>
+
+    <ion-item>
+      Gastos fijos
+      <div class="item-note mr-35" item-end>
+        ${{total_fixed_outcomes | number}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      Gastos variables
+      <div class="item-note mr-35" item-end>
+        ${{total_variable_outcomes | number}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      Gastos extra
+      <div class="item-note mr-35" item-end>
+        ${{total_extra_outcomes | number}}
+      </div>
+    </ion-item>
+
+    <ion-item class="total">
+      Total gastos
+      <div class="item-note mr-35" item-end>
+        ${{total_outcomes | number}}
+      </div>
+    </ion-item>
+
+    <!-- Cash -->
+    <ion-item class="item-header">
+      Caja
+    </ion-item>
+
+    <ion-item>
+      Dólares
+      <div class="item-note mr-35" item-end>
+        ${{total_dollar_purchases | number}}
+      </div>
+    </ion-item>
+
+    <ng-container *ngFor="let result of month_results">
+      <ion-item *ngIf="!result.deleted || result.amount > 0">
+        {{result.name | capitalize}}
+        <div [ngClass]="can_edit ? 'item-note mr-15' : 'item-note mr-35'" item-end>
+          ${{result.amount | number}}
+        </div>
+        <ion-icon class="mr-0" name="create" item-end (click)="editMonthResult(result)" *ngIf="can_edit"></ion-icon>
+      </ion-item>
+    </ng-container>
+
+    <!-- Balance -->
+    <ion-item class="item-header">
+      Balance
+    </ion-item>
+
+    <ion-item>
+      Total registrado
+      <div class="item-note mr-35" item-end>
+        ${{registered_total | number}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      Total caja
+      <div class="item-note mr-35" item-end>
+        ${{total_month_results | number}}
+      </div>
+    </ion-item>
+
+    <ion-item class="total">
+      Diferencia
+      <div class="item-note mr-35" item-end>
+        ${{difference | number}}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      Ganancia
+      <div class="item-note mr-35" item-end>
+        ${{earnings | number}}
+      </div>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-list>
+</ion-content>

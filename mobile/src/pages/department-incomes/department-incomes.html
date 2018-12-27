@@ -1,0 +1,33 @@
+<ion-header>
+  <app-header title="Ingresos de Alquileres"></app-header>
+</ion-header>
+
+<ion-content>
+  <ion-list class="items-list">
+    <ion-item class="no-height"></ion-item>
+    <ng-container *ngFor="let department of departments">
+      <ion-item *ngIf="department.department_incomes.length > 0">
+        <div>
+          {{department.name | capitalize}}
+        </div>
+        <div class="item-note mr-50" item-end>
+          ${{department.department_incomes[0].amount}}
+        </div>
+
+        <ion-icon name="create" item-end (click)="edit(department)" *ngIf="can_edit"></ion-icon>
+      </ion-item>
+    </ng-container>
+
+    <ion-item *ngIf="!hasIncomes()" class="item-center">
+      <div>
+        No hay ingresos cargados
+      </div>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-list>
+
+  <ion-fab bottom right (click)="newIncome()" *ngIf="can_edit">
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

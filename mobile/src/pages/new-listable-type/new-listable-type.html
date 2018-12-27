@@ -1,0 +1,27 @@
+<ion-header>
+  <app-header title="Nuevo dato listable" disabled="true" [showMonths]="false"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Listado</ion-label>
+      <ion-input value="{{data_name}}" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Nombre</ion-label>
+      <ion-input type="text" placeholder="Ingresar nombre" required name="name" [(ngModel)]="name"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">
+          <span>Agregar al listado</span>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

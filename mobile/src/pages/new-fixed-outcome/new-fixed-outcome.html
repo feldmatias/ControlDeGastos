@@ -1,0 +1,29 @@
+<ion-header>
+  <app-header [title]="id != 0 ? 'Editar Gasto Fijo' : 'Nuevo Gasto Fijo'" disabled="true"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Tipo de gasto</ion-label>
+      <ionic-selectable item-content [(ngModel)]="selectedTypeId" [items]="types" itemValueField="id" itemTextField="name" [canSearch]="true" placeholder="Seleccionar tipo" [shouldStoreItemValue]="true" searchPlaceholder="Buscar" searchFailText="No se encontraron resultados" required name="type" [disabled]="id != 0" headerColor="primary">
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Monto</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto" required name="amount" [(ngModel)]="amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">
+          <span *ngIf="id == 0">Cargar gasto</span>
+          <span *ngIf="id != 0">Editar gasto</span>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

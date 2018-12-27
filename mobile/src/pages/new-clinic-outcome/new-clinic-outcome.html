@@ -1,0 +1,38 @@
+<ion-header>
+  <app-header title="Nuevo gasto" disabled="true"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Clínica</ion-label>
+      <ion-input value="{{clinic_name}}" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Tipo de gasto</ion-label>
+      <ionic-selectable item-content [(ngModel)]="type" [items]="types" itemValueField="name" itemTextField="name" [canSearch]="true" placeholder="Seleccionar tipo" [shouldStoreItemValue]="true" searchPlaceholder="Buscar" searchFailText="No se encontraron resultados" required name="type" headerColor="primary" isOnSearchEnabled="true" (onSearch)="onSelectSearch($event)" (onClose)="onSelectClosed($event)">
+      </ionic-selectable>
+    </ion-item>
+
+    <ion-item *ngIf="type == other_type_name">
+      <ion-label color="primary" stacked>Tipo de gasto</ion-label>
+      <ion-input type="text" placeholder="Ingresar tipo" required name="type_name" [(ngModel)]="type_name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Monto</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto" required name="amount" [(ngModel)]="amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">
+          <span>Cargar gasto</span>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

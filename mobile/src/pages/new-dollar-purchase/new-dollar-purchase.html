@@ -1,0 +1,25 @@
+<ion-header>
+  <app-header title="Nueva compra de Dólares" disabled="true"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Monto en Dólares</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto en dólares" required name="dollar_amount" [(ngModel)]="dollar_amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Monto en Pesos</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto en pesos" required name="pesos_amount" [(ngModel)]="pesos_amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">Cargar compra de dólares</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

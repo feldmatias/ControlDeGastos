@@ -1,0 +1,30 @@
+<ion-header>
+  <app-header [title]="id != 0 ? 'Editar Alquiler' : 'Nuevo Alquiler'" disabled="true"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Departamento</ion-label>
+      <ion-select [(ngModel)]="selectedDepartment" cancelText="Cancelar" okText="Seleccionar" placeholder="Seleccionar departamento" name="department" [disabled]="id != 0" required>
+        <ion-option *ngFor="let department of departments" value="{{department.id}}">{{department.name | capitalize}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Monto</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto" required name="amount" [(ngModel)]="amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">
+          <span *ngIf="id == 0">Cargar alquiler</span>
+          <span *ngIf="id != 0">Editar alquiler</span>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

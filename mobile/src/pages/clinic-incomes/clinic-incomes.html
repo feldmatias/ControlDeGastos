@@ -1,0 +1,50 @@
+<ion-header>
+  <app-header title="Ingresos de Clínicas"></app-header>
+</ion-header>
+
+<ion-content>
+  <ion-item no-lines>
+    <ion-select [(ngModel)]="selectedClinic" class="styled-select" cancelText="Cancelar" okText="Seleccionar" placeholder="Clinica">
+      <ion-label>Clínica</ion-label>
+      <ion-option *ngFor="let clinic of clinics" [value]="clinic">{{clinic.name | capitalize}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-list class="items-list" *ngIf="selectedClinic">
+    <ion-item class="no-height"></ion-item>
+    <ion-item *ngIf="selectedClinic.clinic_incomes.length > 0">
+      <div class="results-div">
+        <div class="w-50">
+          <span class="title-span">Total:</span>
+          <span> $ {{selectedClinic.getIncomesTotal()}} </span>
+        </div>
+        <div class="w-50 float-right">
+          <span class="title-span">Promedio:</span>
+          <span> $ {{selectedClinic.getIncomesTotal() / month_length | roundNumber}} </span>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item *ngFor="let income of selectedClinic.clinic_incomes">
+      <div>
+        {{income.moment_date.format('DD/MM')}}
+      </div>
+      <div class="item-note mr-50" item-end>
+        ${{income.amount}}
+      </div>
+
+      <ion-icon name="trash" item-end (click)="delete(income)" *ngIf="can_edit"></ion-icon>
+    </ion-item>
+    
+    <ion-item *ngIf="selectedClinic.clinic_incomes.length == 0" class="item-center">
+      <div>
+        No hay ingresos cargados
+      </div>
+    </ion-item>
+
+    <ion-item></ion-item>
+  </ion-list>
+
+  <ion-fab bottom right (click)="newIncome()" *ngIf="selectedClinic && !selectedClinic.deleted && can_edit">
+    <button ion-fab><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

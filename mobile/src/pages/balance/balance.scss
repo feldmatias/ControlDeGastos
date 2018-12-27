@@ -1,0 +1,44 @@
+page-balance {
+  .mr-35{
+    margin-right: 35px !important;
+  }
+
+  .mr-15{
+    margin-right: 15px !important;
+  }
+
+  .mr-0{
+    margin-right: 0px !important;
+  }
+
+  .items-list{
+    margin-bottom: 60px;
+  }
+  
+  .no-height{
+    height: 0;
+    min-height: 1rem;
+  }
+
+  .item-center{
+    text-align: center;
+  }
+
+  .item-header{
+    .item-inner{
+      background-color: #dedede;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 400;
+    }
+  }
+
+  .total{
+    font-weight: bold;
+  }
+
+  .difference{
+    font-weight: bold;
+    color: red;
+  }
+}

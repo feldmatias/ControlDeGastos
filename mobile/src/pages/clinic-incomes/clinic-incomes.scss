@@ -1,0 +1,47 @@
+page-clinic-incomes {
+  .styled-select{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    border: solid lightgrey 1px;
+    left: 25%;
+    position: relative;
+    max-width: 50%;
+    width: 50%;
+  }
+
+  .mr-50{
+    margin-right: 50px !important;
+  }
+
+  .w-50{
+    width: 50%;
+  }
+
+  .float-right{
+    float: right;
+  }
+
+  .items-list{
+    margin-bottom: 60px;
+  }
+
+  .title-span{
+    font-weight: bold;
+  }
+
+  .results-div{
+    display: flex;
+    text-align: center;
+  }
+
+  .no-height{
+    height: 0;
+    min-height: 1rem;
+  }
+
+  .item-center{
+    text-align: center;
+  }
+  
+}

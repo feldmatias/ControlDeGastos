@@ -1,0 +1,22 @@
+<ion-navbar color="primary">
+  <button ion-button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>{{title}}</ion-title>
+  <ion-buttons end *ngIf="!disabled">
+    <button (click)="onChange()" ion-button icon-only>
+      <ion-icon name="sync"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-toolbar color="primary" *ngIf="showMonths">
+  <ion-label *ngIf="disabled" class="max-width month-label">{{currentMonth.display_name | titlecase}}</ion-label>
+  <ion-item class="transparent" *ngIf="!disabled">
+    <ion-label>Mes</ion-label>
+    <ion-select [(ngModel)]="selectedMonthId" class="max-width" cancelText="Cancelar" okText="Seleccionar" (ngModelChange)="onChange()">
+      <ion-option *ngFor="let month of months" value="{{month.id}}">{{month.display_name | titlecase}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-toolbar>
+
