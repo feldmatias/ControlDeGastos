@@ -21,7 +21,7 @@ class VariableOutcome extends BasicMonthModel{
     public static function getByMonth($month){
         return VariableOutcome::whereHas('month', function($query) use ($month){
                 $query->where('id', $month->id);
-            })->get();
+            })->latest()->get();
     }
 
     public static function getValidationRules(){

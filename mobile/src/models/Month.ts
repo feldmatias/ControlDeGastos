@@ -53,7 +53,7 @@ export class Month extends BasicMonth{
   }
 
   addVariableOutcome(outcome){
-    this.variable_outcomes.push(new VariableOutcome(outcome));
+    this.variable_outcomes.unshift(new VariableOutcome(outcome));
   }
 
   deleteVariableOutcome(outcome: VariableOutcome){
@@ -89,10 +89,10 @@ export class Month extends BasicMonth{
 
     this.clinics[index].clinic_incomes.sort(function(a, b){
       if (a.date < b.date){
-        return -1;
+        return 1;
       }
       if (a.date > b.date){
-        return 1;
+        return -1;
       }
       return 0;
     })

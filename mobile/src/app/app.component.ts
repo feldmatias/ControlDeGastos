@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, IonicApp, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiProvider } from '../providers/api/api';
@@ -26,16 +26,16 @@ export class MyApp {
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-        public apiProvider: ApiProvider, public accessibility: MobileAccessibility) {
+        public apiProvider: ApiProvider, public accessibility: MobileAccessibility, public app: IonicApp,
+        public menuCtrl: MenuController) {
 
     this.initializeApp();
 
     this.pages = [
-      { title: 'Home', component: HomePage, icon: 'apps' },
-      { title: 'Gastos Fijos', component: FixedOutcomesPage, icon: 'ios-card' },
       { title: 'Gastos Variables', component: VariableOutcomesPage, icon: 'cart' },
-      { title: 'Gastos de Clínicas', component: ClinicOutcomesPage, icon: 'cash' },
       { title: 'Ingresos de Clínicas', component: ClinicIncomesPage, icon: 'desktop' },
+      { title: 'Gastos Fijos', component: FixedOutcomesPage, icon: 'ios-card' },
+      { title: 'Gastos de Clínicas', component: ClinicOutcomesPage, icon: 'cash' },
       { title: 'Ingresos de Alquileres', component: DepartmentIncomesPage, icon: 'ios-home' },
       { title: 'Dólares', component: DollarPurchasesPage, icon: 'logo-usd' },
       { title: 'Balance', component: BalancePage, icon: 'stats' },
@@ -52,7 +52,11 @@ export class MyApp {
       this.splashScreen.hide();
 
       this.platform.registerBackButtonAction(() => {
-        if (this.nav.canGoBack()){
+        if (this.closeModals()) {
+          // it will close the modals, alerts
+        } else if (this.closeMenu()){
+          // it will close the menu
+        } else if (this.nav.canGoBack()){
           this.nav.pop();
         } else {
           this.nav.setRoot(this.rootPage);
@@ -62,6 +66,8 @@ export class MyApp {
       this.platform.resume.subscribe(() => {
         this.apiProvider.updateMonth();
         this.nav.popToRoot();
+        this.closeModals();
+        this.closeMenu();
       }); 
 
       this.accessibility.usePreferredTextZoom(false);
@@ -72,5 +78,25 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  closeMenu(){
+    if (this.menuCtrl.isOpen()){
+      this.menuCtrl.close();
+      return true;
+    }
+    return false;
+  }
+
+  closeModals(){
+    const activePortal = this.app._loadingPortal.getActive() ||
+      this.app._modalPortal.getActive() ||
+      this.app._toastPortal.getActive() ||
+      this.app._overlayPortal.getActive();
+    if (activePortal) {
+      activePortal.dismiss();
+      return true;
+    }
+    return false;
   }
 }

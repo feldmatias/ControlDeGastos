@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Clinic extends BasicDeletableModel{
     
     public function clinicIncomes(){
-        return $this->hasMany('App\ClinicIncome')->orderBy('date');
+        return $this->hasMany('App\ClinicIncome')->orderBy('date', 'desc');
     }
 
     public function clinicOutcomes(){
