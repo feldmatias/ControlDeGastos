@@ -38,6 +38,9 @@ Route::post('clinic/outcome/type/delete/{id}', 'ClinicController@deleteOutcomeTy
 Route::post('clinic/create', 'ClinicController@create');
 Route::post('clinic/delete/{id}', 'ClinicController@delete');
 
+Route::post('variableIncome/store', 'VariableIncomeController@store');
+Route::post('variableIncome/delete/{id}', 'VariableIncomeController@delete');
+
 Route::post('dollarPurchase/store', 'DollarPurchaseController@store');
 Route::post('dollarPurchase/delete/{id}', 'DollarPurchaseController@delete');
 

@@ -1,6 +1,7 @@
 import { BasicModel } from './BasicModel';
 import { FixedOutcomeType, FixedOutcome } from './FixedOutcome';
 import { VariableOutcome } from './VariableOutcome';
+import { VariableIncome } from './VariableIncome';
 import { Department, DepartmentIncome } from './Department';
 import { Clinic, ClinicIncome, ClinicOutcome } from './Clinic';
 import { DollarPurchase } from './DollarPurchase';
@@ -37,6 +38,7 @@ export class Month extends BasicMonth{
 
   fixed_outcomes: Array<FixedOutcomeType>;
   variable_outcomes: Array<VariableOutcome>;
+  variable_incomes: Array<VariableIncome>;
   departments: Array<Department>;
   clinics: Array<Clinic>;
   dollar_purchases: Array<DollarPurchase>;
@@ -46,6 +48,7 @@ export class Month extends BasicMonth{
     super.init();
     this.fixed_outcomes = this.fixed_outcomes.map((outcome) => new FixedOutcomeType(outcome));
     this.variable_outcomes = this.variable_outcomes.map((outcome) => new VariableOutcome(outcome));
+    this.variable_incomes = this.variable_incomes.map((income) => new VariableIncome(income));
     this.departments = this.departments.map((department) => new Department(department));
     this.clinics = this.clinics.map((clinic) => new Clinic(clinic));
     this.dollar_purchases = this.dollar_purchases.map((purchase) => new DollarPurchase(purchase));
@@ -62,6 +65,18 @@ export class Month extends BasicMonth{
         });
 
     this.variable_outcomes.splice(index, 1);
+  }
+
+  addVariableIncome(income){
+    this.variable_incomes.unshift(new VariableIncome(income));
+  }
+
+  deleteVariableIncome(income: VariableIncome){
+    let index = this.variable_incomes.findIndex(function(element){
+          return element.id == income.id;
+        });
+
+    this.variable_incomes.splice(index, 1);
   }
 
   addFixedOutcome(outcome, type_id){

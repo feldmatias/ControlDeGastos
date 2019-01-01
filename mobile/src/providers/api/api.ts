@@ -82,6 +82,27 @@ export class ApiProvider {
                   })
   }
 
+  addVariableIncome(income){
+    let url = 'variableIncome/store';
+
+    income.month_id = this.getCurrentMonth().id;
+
+    this.server.post(url, income).subscribe((id) => {
+                    income.id = id;
+                    this.getCurrentMonth().addVariableIncome(income);
+                    this.showToast('Ingreso agregado con éxito');
+                  })
+  }
+
+  deleteVariableIncome(income){
+    let url = 'variableIncome/delete/' + income.id;
+
+    this.server.post(url, income).subscribe(() => {
+                    this.getCurrentMonth().deleteVariableIncome(income);
+                    this.showToast('Ingreso eliminado con éxito');
+                  })
+  }
+
   addFixedOutcome(outcome){
     let url = 'fixedOutcome/store';
 

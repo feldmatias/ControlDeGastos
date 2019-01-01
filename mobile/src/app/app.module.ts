@@ -10,6 +10,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { VariableOutcomesPage } from '../pages/variable-outcomes/variable-outcomes';
 import { NewVariableOutcomePage } from '../pages/new-variable-outcome/new-variable-outcome';
+import { VariableIncomesPage } from '../pages/variable-incomes/variable-incomes';
+import { NewVariableIncomePage } from '../pages/new-variable-income/new-variable-income';
 import { FixedOutcomesPage } from '../pages/fixed-outcomes/fixed-outcomes';
 import { NewFixedOutcomePage } from '../pages/new-fixed-outcome/new-fixed-outcome';
 import { ClinicIncomesPage } from '../pages/clinic-incomes/clinic-incomes';
@@ -39,6 +41,8 @@ import { ApiProvider } from '../providers/api/api';
     HomePage,
     VariableOutcomesPage,
     NewVariableOutcomePage,
+    VariableIncomesPage,
+    NewVariableIncomePage,
     FixedOutcomesPage,
     NewFixedOutcomePage,
     ClinicIncomesPage,
@@ -69,6 +73,8 @@ import { ApiProvider } from '../providers/api/api';
     HomePage,
     VariableOutcomesPage,
     NewVariableOutcomePage,
+    VariableIncomesPage,
+    NewVariableIncomePage,
     FixedOutcomesPage,
     NewFixedOutcomePage,
     ClinicIncomesPage,

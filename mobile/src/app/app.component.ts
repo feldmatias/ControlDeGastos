@@ -7,6 +7,7 @@ import { MobileAccessibility } from '@ionic-native/mobile-accessibility';
 
 import { HomePage } from '../pages/home/home';
 import { VariableOutcomesPage } from '../pages/variable-outcomes/variable-outcomes';
+import { VariableIncomesPage } from '../pages/variable-incomes/variable-incomes';
 import { FixedOutcomesPage } from '../pages/fixed-outcomes/fixed-outcomes';
 import { ClinicIncomesPage } from '../pages/clinic-incomes/clinic-incomes';
 import { ClinicOutcomesPage } from '../pages/clinic-outcomes/clinic-outcomes';
@@ -37,6 +38,7 @@ export class MyApp {
       { title: 'Gastos Fijos', component: FixedOutcomesPage, icon: 'ios-card' },
       { title: 'Gastos de Clínicas', component: ClinicOutcomesPage, icon: 'cash' },
       { title: 'Ingresos de Alquileres', component: DepartmentIncomesPage, icon: 'ios-home' },
+      { title: 'Otros Ingresos', component: VariableIncomesPage, icon: 'calculator' },
       { title: 'Dólares', component: DollarPurchasesPage, icon: 'logo-usd' },
       { title: 'Balance', component: BalancePage, icon: 'stats' },
       { title: 'Configuración', component: ConfigurationPage, icon: 'settings' },

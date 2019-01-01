@@ -11,7 +11,7 @@ class Month extends Model{
     protected $casts = ['year' => 'integer', 'month' => 'integer', 'initial_balance' => 'integer'];
 
     protected $appends = ['start', 'end', 'clinics', 'departments', 'fixed_outcomes', 
-                          'variable_outcomes', 'dollar_purchases', 'results'];
+                          'variable_outcomes', 'dollar_purchases', 'results', 'variable_incomes'];
 
     public function getStartAttribute(){
         return Carbon::createFromDate($this->year, $this->month)->startOfMonth();
@@ -35,6 +35,10 @@ class Month extends Model{
 
     public function getVariableOutcomesAttribute(){
         return VariableOutcome::getByMonth($this);
+    }
+
+    public function getVariableIncomesAttribute(){
+        return VariableIncome::getByMonth($this);
     }
 
     public function getDollarPurchasesAttribute(){

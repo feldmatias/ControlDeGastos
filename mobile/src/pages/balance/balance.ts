@@ -19,6 +19,7 @@ export class BalancePage extends BasicListPage{
   total_clinic_incomes: number = 0;
   total_clinic_outcomes: number = 0;
   total_department_incomes: number = 0;
+  total_variable_incomes: number = 0;
   total_incomes: number = 0;
 
   total_fixed_outcomes: number = 0;
@@ -82,7 +83,12 @@ export class BalancePage extends BasicListPage{
           }, 0)
         }, 0);
 
-    this.total_incomes = this.total_clinic_incomes + this.total_department_incomes - this.total_clinic_outcomes;
+    this.total_variable_incomes = current_month.variable_incomes
+        .reduce(function(total, variable_income){
+          return total + variable_income.amount;
+        }, 0);
+
+    this.total_incomes = this.total_clinic_incomes + this.total_department_incomes - this.total_clinic_outcomes + this.total_variable_incomes;
   }
 
   private calculate_outcomes(current_month: Month){

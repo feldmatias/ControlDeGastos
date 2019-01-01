@@ -1,0 +1,25 @@
+<ion-header>
+  <app-header title="Nuevo Ingreso" disabled="true"></app-header>
+</ion-header>
+
+
+<ion-content padding>
+  <form #form="ngForm">
+    <ion-item>
+      <ion-label color="primary" stacked>Tipo de ingreso</ion-label>
+      <ion-input type="text" placeholder="Ingresar tipo" required name="type" [(ngModel)]="type"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Monto</ion-label>
+      <ion-input type="number" placeholder="Ingresar monto" required name="amount" [(ngModel)]="amount" min="0" pattern="[0-9]+"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="button-col">
+        <button ion-button round [disabled]="!form.form.valid" (click)="submit()">Cargar ingreso</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>
