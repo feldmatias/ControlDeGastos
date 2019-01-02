@@ -82,6 +82,7 @@ class Month extends Model{
         $this->hasMany('App\ClinicOutcome')->delete();
         $this->hasMany('App\FixedOutcome')->delete();
         $this->hasMany('App\VariableOutcome')->delete();
+        $this->hasMany('App\VariableIncome')->delete();
         $this->hasMany('App\DollarPurchase')->delete();
         $this->hasMany('App\DepartmentIncome')->delete();
         $this->hasMany('App\MonthResult')->delete();
