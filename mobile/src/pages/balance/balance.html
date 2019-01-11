@@ -3,7 +3,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="items-list">
+  <ion-list>
     <ion-item class="no-height"></ion-item>
 
     <ion-item class="item-header">
@@ -51,6 +51,13 @@
       </div>
     </ion-item>
 
+    <ion-item *ngIf="previous_month_merged">
+      Ingresos del mes anterior
+      <div class="item-note mr-35" item-end>
+        ${{merged_month_balance.incomes | number}}
+      </div>
+    </ion-item>
+
     <ion-item class="total">
       Total ingresos
       <div class="item-note mr-35" item-end>
@@ -84,6 +91,13 @@
       </div>
     </ion-item>
 
+    <ion-item *ngIf="previous_month_merged">
+      Gastos del mes anterior
+      <div class="item-note mr-35" item-end>
+        ${{merged_month_balance.outcomes | number}}
+      </div>
+    </ion-item>
+
     <ion-item class="total">
       Total gastos
       <div class="item-note mr-35" item-end>
@@ -96,6 +110,18 @@
       Caja
     </ion-item>
 
+    <ng-container *ngIf="!month_merged">
+      <ng-container *ngFor="let result of month_results">
+        <ion-item *ngIf="!result.deleted || result.amount > 0">
+          {{result.name | capitalize}}
+          <div [ngClass]="can_edit ? 'item-note mr-15' : 'item-note mr-35'" item-end>
+            ${{result.amount | number}}
+          </div>
+          <ion-icon class="mr-0" name="create" item-end (click)="editMonthResult(result)" *ngIf="can_edit"></ion-icon>
+        </ion-item>
+      </ng-container>
+    </ng-container>
+
     <ion-item>
       Dólares
       <div class="item-note mr-35" item-end>
@@ -103,15 +129,12 @@
       </div>
     </ion-item>
 
-    <ng-container *ngFor="let result of month_results">
-      <ion-item *ngIf="!result.deleted || result.amount > 0">
-        {{result.name | capitalize}}
-        <div [ngClass]="can_edit ? 'item-note mr-15' : 'item-note mr-35'" item-end>
-          ${{result.amount | number}}
-        </div>
-        <ion-icon class="mr-0" name="create" item-end (click)="editMonthResult(result)" *ngIf="can_edit"></ion-icon>
-      </ion-item>
-    </ng-container>
+    <ion-item *ngIf="previous_month_merged">
+      Dólares del mes anterior
+      <div class="item-note mr-35" item-end>
+        ${{merged_month_balance.dollars | number}}
+      </div>
+    </ion-item>
 
     <!-- Balance -->
     <ion-item class="item-header">
@@ -125,27 +148,39 @@
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="!month_merged">
       Total caja
       <div class="item-note mr-35" item-end>
-        ${{total_month_results | number}}
+        ${{total_cash_resgister | number}}
       </div>
     </ion-item>
 
-    <ion-item class="total">
+    <ion-item class="total" *ngIf="!month_merged">
       Diferencia
       <div class="item-note mr-35" item-end>
         ${{difference | number}}
       </div>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="total_month_results && !month_merged">
       Ganancia
       <div class="item-note mr-35" item-end>
         ${{earnings | number}}
       </div>
     </ion-item>
 
-    <ion-item></ion-item>
+    <ion-item class="no-height"></ion-item>
   </ion-list>
+
+  <ion-row *ngIf="!month_merged && !previous_month_merged && !month_is_current && !total_month_results">
+    <ion-col class="button-col">
+      <button ion-button round (click)="mergeWithNextMonth()">Juntar con el mes siguiente</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="month_merged">
+    <ion-col class="button-col">
+      <button ion-button round (click)="unmergeWithNextMonth()">Separar del mes siguiente</button>
+    </ion-col>
+  </ion-row>
 </ion-content>

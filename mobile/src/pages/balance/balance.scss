@@ -10,10 +10,6 @@ page-balance {
   .mr-0{
     margin-right: 0px !important;
   }
-
-  .items-list{
-    margin-bottom: 60px;
-  }
   
   .no-height{
     height: 0;
@@ -40,5 +36,10 @@ page-balance {
   .difference{
     font-weight: bold;
     color: red;
+  }
+
+  .button-col{
+    text-align: center;
+    margin-bottom: 20px;
   }
 }

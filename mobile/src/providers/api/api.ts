@@ -33,6 +33,26 @@ export class ApiProvider {
                     error => this.onDataUpdated());
   }
 
+  mergeMonthWithNext(){
+    let url = 'month/merge/' + this.getCurrentMonth().id;
+
+    this.server.get(url).subscribe((data) => {
+                    this.data = new ServerData(data); 
+                    this.onDataUpdated();
+                    this.showToast('Mes juntado con el mes siguiente');
+                  })
+  }
+
+  unmergeMonthWithNext(){
+    let url = 'month/unmerge/' + this.getCurrentMonth().id;
+
+    this.server.get(url).subscribe((data) => {
+                    this.data = new ServerData(data); 
+                    this.onDataUpdated();
+                    this.showToast('Mes separado del mes siguiente');
+                  })
+  }
+
   onDataUpdated(){
     this.dataUpdatedSource.next(true);
   }

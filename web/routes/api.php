@@ -48,3 +48,5 @@ Route::post('month/result/store', 'MonthController@storeResult');
 Route::post('month/result/type/create', 'MonthController@createResultValue');
 Route::post('month/result/type/delete/{id}', 'MonthController@deleteResultValue');
 Route::post('month/initialBalance/update', 'MonthController@updateInitialBalance');
+Route::get('month/merge/{id}', 'MonthController@mergeWithNextMonth');
+Route::get('month/unmerge/{id}', 'MonthController@unmergeWithNextMonth');

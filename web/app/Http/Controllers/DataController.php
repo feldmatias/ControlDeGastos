@@ -9,7 +9,7 @@ use App\Month;
 
 class DataController extends Controller{
     
-    public function get($id = 0){
+    public static function get($id = 0){
         MonthController::checkCurrentMonth();
 
         $month = Month::findOrNew($id);

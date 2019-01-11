@@ -43,9 +43,24 @@ class MonthController extends BasicController{
             Month::createCurrentMonth();
         }
 
-        if (Month::count() > self::max_months_stored){
-            $oldest = Month::first();
+        if (Month::where('merge_with_next_month', false)->count() > self::max_months_stored){
+            $oldest = Month::where('merge_with_next_month', false)->first();
+            if ($oldest_merge = $oldest->getPreviousMonth()){
+                $oldest_merge->deleteAllData();
+            }
             $oldest->deleteAllData();
         }
+    }
+
+    public function mergeWithNextMonth($id){
+        $month = Month::find($id);
+        $month->mergeWithNextMonth(true);
+        return DataController::get($id);
+    }
+
+    public function unmergeWithNextMonth($id){
+        $month = Month::find($id);
+        $month->mergeWithNextMonth(false);
+        return DataController::get($id);
     }
 }

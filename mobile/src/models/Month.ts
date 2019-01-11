@@ -6,17 +6,17 @@ import { Department, DepartmentIncome } from './Department';
 import { Clinic, ClinicIncome, ClinicOutcome } from './Clinic';
 import { DollarPurchase } from './DollarPurchase';
 import { MonthResultType, MonthResult } from './MonthResult';
+import { MonthBalance } from './MonthBalance';
 import * as moment from 'moment';
 
 export class BasicMonth extends BasicModel{
-  static days_after_month = 5;
-
   id: number;
   year: number;
   month: number;
   display_name: string;
   can_edit: boolean;
   current_days: number;
+  current: boolean;
   start_date: moment.Moment;
   end_date: moment.Moment;
 
@@ -26,15 +26,20 @@ export class BasicMonth extends BasicModel{
     this.end_date = moment(this.year.toString() + '-' + this.month.toString() + '-01', 'YYYY-MM-DD').endOf('month');
     this.start_date = this.end_date.clone().startOf('month');
     
-    this.can_edit = this.end_date.clone().add(BasicMonth.days_after_month, 'days') >= moment();
+    this.can_edit = this.end_date.clone().add(1, 'months') >= moment();
 
     this.current_days = this.end_date < moment() ? this.end_date.date() : moment().date();
+
+    this.current = moment() <= this.end_date;
   }
 }
 
 export class Month extends BasicMonth{
   initial_balance: number;
   calculated_initial_balance: number;
+  merge_with_next_month: boolean;
+  merged_previous_month: boolean;
+  merged_month_data: MonthBalance;
 
   fixed_outcomes: Array<FixedOutcomeType>;
   variable_outcomes: Array<VariableOutcome>;
@@ -46,6 +51,7 @@ export class Month extends BasicMonth{
 
   init(){
     super.init();
+    this.merged_month_data = new MonthBalance(this.merged_month_data);
     this.fixed_outcomes = this.fixed_outcomes.map((outcome) => new FixedOutcomeType(outcome));
     this.variable_outcomes = this.variable_outcomes.map((outcome) => new VariableOutcome(outcome));
     this.variable_incomes = this.variable_incomes.map((income) => new VariableIncome(income));

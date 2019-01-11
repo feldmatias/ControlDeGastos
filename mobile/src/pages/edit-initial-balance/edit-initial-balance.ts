@@ -15,8 +15,16 @@ export class EditInitialBalancePage {
   constructor(public navCtrl: NavController, public apiProvider: ApiProvider) {
     var current_month = this.apiProvider.getCurrentMonth();
 
-    this.calculated_initial_balance = current_month.calculated_initial_balance;
-    this.initial_balance = current_month.initial_balance ? current_month.initial_balance : this.calculated_initial_balance;
+    this.calculated_initial_balance = current_month.merged_previous_month ? 
+        current_month.merged_month_data.initial_balance : current_month.calculated_initial_balance;
+    
+    if (current_month.initial_balance){
+      this.initial_balance = current_month.initial_balance;
+    } else if (current_month.merged_previous_month) {
+      this.initial_balance = current_month.merged_month_data.initial_balance;
+    } else {
+      this.initial_balance = current_month.calculated_initial_balance;
+    }
 
   }
 

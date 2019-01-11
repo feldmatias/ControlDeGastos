@@ -8,10 +8,11 @@ use Carbon\Carbon;
 class Month extends Model{
     protected $hidden = ['created_at', 'updated_at', 'start', 'end'];
 
-    protected $casts = ['year' => 'integer', 'month' => 'integer', 'initial_balance' => 'integer'];
+    protected $casts = ['year' => 'integer', 'month' => 'integer', 'initial_balance' => 'integer', 'merge_with_next_month' => 'boolean'];
 
     protected $appends = ['start', 'end', 'clinics', 'departments', 'fixed_outcomes', 
-                          'variable_outcomes', 'dollar_purchases', 'results', 'variable_incomes'];
+                          'variable_outcomes', 'dollar_purchases', 'results', 'variable_incomes', 
+                          'merged_previous_month', 'merged_month_data'];
 
     public function getStartAttribute(){
         return Carbon::createFromDate($this->year, $this->month)->startOfMonth();
@@ -19,6 +20,27 @@ class Month extends Model{
 
     public function getEndAttribute(){
         return Carbon::createFromDate($this->year, $this->month)->endOfMonth();
+    }
+
+    public function getMergedPreviousMonthAttribute(){
+        $previous = $this->getPreviousMonth();
+        if (!$previous){
+            return false;
+        }
+        return $previous->merge_with_next_month;
+    }
+
+    public function getMergedMonthDataAttribute(){
+        $data = new MonthBalance();
+        if ($this->merged_previous_month){
+            $data->calculateForMonth($this->getPreviousMonth());
+        }
+        return $data;
+    }
+
+    public function mergeWithNextMonth($merge){
+        $this->merge_with_next_month = $merge;
+        $this->save();
     }
 
     public function getClinicsAttribute(){
@@ -65,7 +87,7 @@ class Month extends Model{
         return $total;
     }
 
-    private function getPreviousMonth(){
+    public function getPreviousMonth(){
         $date = $this->start->copy()->subMonths(1);
         return Month::where('year', $date->year)->where('month', $date->month)->first();
     }

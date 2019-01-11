@@ -7,10 +7,10 @@
     <ion-item class="no-height"></ion-item>
     <ng-container *ngFor="let outcome of fixed_outcomes">
       <ion-item *ngIf="outcome.fixed_outcomes.length > 0">
-        <div>
+        <div class="word-break">
           {{outcome.name | capitalize}}
         </div>
-        <div class="item-note mr-50" item-end>
+        <div class="item-note mr-20" item-end>
           ${{outcome.fixed_outcomes[0].amount}}
         </div>
 
