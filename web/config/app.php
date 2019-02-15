@@ -2,7 +2,10 @@
 
 return [
 
-    'api_key' => env('API_KEY', '12345'),
+    'api_key' => env('API_KEY', '123456'),
+
+    'backup_mail' => "abc@abc",
+    'backup_mail_password' => 'abc',
 
     /*
     |--------------------------------------------------------------------------
