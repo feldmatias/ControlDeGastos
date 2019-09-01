@@ -15,11 +15,11 @@ class Month extends Model{
                           'merged_previous_month', 'merged_month_data'];
 
     public function getStartAttribute(){
-        return Carbon::createFromDate($this->year, $this->month)->startOfMonth();
+        return Carbon::createFromDate($this->year, $this->month, 1)->startOfMonth();
     }
 
     public function getEndAttribute(){
-        return Carbon::createFromDate($this->year, $this->month)->endOfMonth();
+        return Carbon::createFromDate($this->year, $this->month, 1)->endOfMonth();
     }
 
     public function getMergedPreviousMonthAttribute(){
