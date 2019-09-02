@@ -75,7 +75,7 @@ class Month extends Model{
         $total = 0;
         $previous = $this->getPreviousMonth();
         if (!$previous){
-            return $value;
+            return intval($value);
         }
 
         $total = $previous->results->reduce(function($total, $result){
