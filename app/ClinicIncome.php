@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClinicIncome extends Model{
+class ClinicIncome extends BaseModel{
     protected $hidden = ['created_at', 'updated_at'];
-    
+
     protected $casts = ['amount' => 'integer'];
-    
+
     public function store($request){
         $this->amount = $request->get('amount');
         $this->clinic_id = $request->get('clinic_id');

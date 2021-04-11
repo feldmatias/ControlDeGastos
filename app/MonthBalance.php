@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MonthBalance extends Model{
-    
+class MonthBalance extends BaseModel{
+
     public function __construct(){
         $this->initial_balance = 0;
         $this->incomes = 0;

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BasicDeletableModel extends Model{
+class BasicDeletableModel extends BaseModel{
     protected $hidden = ['created_at', 'updated_at'];
 
     protected $casts = ['deleted' => 'boolean'];

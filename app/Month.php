@@ -5,13 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Month extends Model{
+class Month extends BaseModel{
     protected $hidden = ['created_at', 'updated_at', 'start', 'end'];
 
     protected $casts = ['year' => 'integer', 'month' => 'integer', 'initial_balance' => 'integer', 'merge_with_next_month' => 'boolean'];
 
-    protected $appends = ['start', 'end', 'clinics', 'departments', 'fixed_outcomes', 
-                          'variable_outcomes', 'dollar_purchases', 'results', 'variable_incomes', 
+    protected $appends = ['start', 'end', 'clinics', 'departments', 'fixed_outcomes',
+                          'variable_outcomes', 'dollar_purchases', 'results', 'variable_incomes',
                           'merged_previous_month', 'merged_month_data'];
 
     public function getStartAttribute(){
@@ -125,5 +125,5 @@ class Month extends Model{
                 'initial_balance' => 'required|numeric'
             ];
     }
-    
+
 }
