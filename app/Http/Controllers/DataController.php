@@ -19,7 +19,7 @@ class DataController extends Controller{
 
         $data = ['clinic_outcome_types' => ClinicOutcomeType::orderBy('name')->get(),
                  'variable_outcome_types' => VariableOutcomeType::orderBy('name')->get(),
-                 'months' => Month::get()->map(function ($element){
+                 'months' => Month::orderBy('id', 'asc')->get()->map(function ($element){
                     return $element->only('id', 'month', 'year');
                 }),
                  'month' => $month,
