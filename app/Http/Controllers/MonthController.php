@@ -43,13 +43,13 @@ class MonthController extends BasicController{
             Month::createCurrentMonth();
         }
 
-        /*if (Month::where('merge_with_next_month', false)->count() > self::max_months_stored){
-            $oldest = Month::where('merge_with_next_month', false)->first();
+        if (Month::where('merge_with_next_month', false)->count() > self::max_months_stored){
+            $oldest = Month::where('merge_with_next_month', false)->orderBy('id', 'asc')->first();
             if ($oldest_merge = $oldest->getPreviousMonth()){
                 $oldest_merge->deleteAllData();
             }
             $oldest->deleteAllData();
-        }*/
+        }
     }
 
     public function mergeWithNextMonth($id){
